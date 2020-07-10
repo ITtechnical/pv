@@ -1,0 +1,84 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+<div class="card border-0">
+    {% for group in user.groups.all %} {% if group.name == 'director' %}
+    <div class="card-header">
+        <h4 class="  text-dark d-flex justify-content-center">Total Registered Pv </h4>
+        <a href="{% url 'pv:registedcsv' %}" class="btn btn-sm float-right m-2" style="background-color:#12b056; color:white;">Generate Csv File</a>
+
+    </div>
+    {% endif %} {% endfor %}
+
+
+    <div class="card-body">
+        <table id="example2" class="table  table-hover ">
+            <tr>
+
+                <thead class="thead-light  success">
+                    <tr>
+                        <th scope="col">Pv Ref.</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">IA code</th>
+                        <th scope="col">Gross (GH&#8373) </th>
+                        <th scope="col">Tax (GH&#8373) </th>
+                        <th scope="col">Net  (GH&#8373) </th>
+                        <th scope="col">Acc. Impress</th>
+                        <th scope="col">Status</th>
+                        <th scope="col"></th>
+                        {% for group in user.groups.all %} {% if group.name == 'standard' %}
+                        <th scope="col"></th>
+                        {% endif %} {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pv in pvs %}
+                    <tr>
+                        <td>{{pv.Pv_reference}}</td>
+                        <td>{{pv.Description}}</td>
+                        <td>{{pv.IA_code}}</td>
+                        <td> {{pv.Gross_amount}} </td>
+                        <td> {{pv.Withholding_tax}}</td>
+                        <td> {{pv.Net_amount}}</td>
+                        <td>{{pv.Acc_Impress}}</td>
+                        <td>
+
+                            {% if pv.Status == 'Completed' %}
+                            <span class="badge bg-success">{{pv.Status}}</span> {% elif pv.Status == 'Returned' %}
+                            <span class="badge bg-warning">{{pv.Status}}</span> {% else %}
+                            <span class="badge bg-danger">{{pv.Status}}</span> {% endif %}
+                        </td>
+
+
+
+                        {% for group in user.groups.all %} {% if group.name == 'director' %}
+                        <td>
+                            {% if pv.Type_of_pv == 'General' %}
+                            <a class="btn btn-xs btn-sm accent-white" href="{% url 'pv:pv-detail' pk=pv.IA_System_Code  %} " style="background-color:gray; color:white;">View</a> {% else %}
+                            <a class="btn btn-xs btn-sm accent-white" href="{% url 'pv:hondetails' pk=pv.IA_System_Code  %} " style="background-color:gray; color:white;">View</a> {% endif %}
+                        </td>
+
+                        {% else %}
+                        <td>
+                            {% if pv.Type_of_pv == 'General' %}
+                            <a class="btn btn-xs btn-sm accent-white" href="{% url 'pv:pv-detail' pk=pv.IA_System_Code  %} " style="background-color:gray; color:white;">View</a> {% else %}
+                            <a class="btn btn-xs btn-sm accent-white" href="{% url 'pv:hondetails' pk=pv.IA_System_Code  %} " style="background-color:gray; color:white;">View</a> {% endif %}
+                        </td>
+                        <td>
+                            {% if pv.Type_of_pv == 'General' %}
+                            <a class="btn btn-xs btn-sm accent-white" href="{% url 'pv:pvupdate' pk=pv.IA_System_Code  %} " style="background-color:#12b056; color:white;">Update</a> {% else %}
+                            <a class="btn btn-xs btn-sm accent-white" href="{% url 'pv:hunupdate' pk=pv.IA_System_Code  %} " style="background-color:#12b056; color:white;">Update</a> {% endif %}
+                        </td>
+                        {% endif %} {% endfor %}
+
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center ">No Registerd Pvs</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+        </table>
+
+    </div>
+</div>
+{% endblock %}

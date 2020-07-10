@@ -1,0 +1,69 @@
+{% load static %}
+
+<div class="row">
+    <div class="col-md-3 col-6">
+        <!-- small card -->
+        <div class="small-box " style="background-color:#6c757d;color:white;">
+            <div class="inner">
+                <p class="float-left pt-4">Processed PV's</p>
+                <h1 class="d-flex justify-content-end display-4 text-bold">{{ total_pv }}</h1>
+            </div>
+            {% for group in user.groups.all %} {% if group.name == 'director' %}
+            <a href="{% url 'pv:monthlyregistedpv' %}" class="small-box-footer">
+             More info <i class="fas fa-arrow-circle-right"></i>
+             {% endif %}
+             {% endfor %}
+                 
+
+        </a>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <!-- small card -->
+        <div class="small-box " style="background-color:#31cb72;color:white;">
+            <div class="inner">
+                <p class="float-left pt-4">PV's Completed</p>
+                <h1 class="d-flex justify-content-end display-4 text-bold">{{ completed_pv }}</h1>
+
+            </div>
+            <div class="icon">
+
+            </div>
+            {% for group in user.groups.all %} {% if group.name == 'director' %}
+            <a href="{% url 'pv:monthlycompletedpv' %}" class="small-box-footer">
+          More info <i class="fas fa-arrow-circle-right"></i>
+        </a> {% endif %} {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <!-- small card -->
+        <div class="small-box" style="background-color:#3399cc;color:white;">
+            <div class="inner">
+                <p class="float-left pt-4">PV's Returned </p>
+                <h1 class="d-flex justify-content-end display-4 text-bold">{{ returned_pv }}</h1>
+            </div>
+            {% for group in user.groups.all %} {% if group.name == 'director' %}
+            <a href="{% url 'pv:monthlyreturnedpv' %}" class="small-box-footer">
+          More info <i class="fas fa-arrow-circle-right"></i>
+        </a> {% endif %} {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <!-- small card -->
+        <div class="small-box" style="background-color:#ff6666;color:white;">
+            <div class="inner">
+                <p class="float-left pt-4">PV's Cancelled</p>
+                <h1 class="d-flex justify-content-end display-4 text-bold">{{ cancelled_pv }}</h1>
+
+            </div>
+            <div class="icon">
+
+            </div>
+            {% for group in user.groups.all %} {% if group.name == 'director' %}
+            <a href="{% url 'pv:monthlycancelledpv' %}" class="small-box-footer">
+          More info <i class="fas fa-arrow-circle-right"></i>
+        </a> {% endif %} {% endfor %}
+        </div>
+    </div>
+
+</div>
