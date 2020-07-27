@@ -42,16 +42,13 @@ def UserDash(request):
     cancelled_pv = total.filter(Status='Cancelled').count()
     completed_pv =total.filter(Status='Completed').count()
     returned_pv =total.filter(Status='Returned').count()
-
+     
+    paginator = Paginator(total, 5)
+    page_number = request.GET.get('page')
+    users = paginator.get_page(page_number)
     page = request.GET.get('page', 1)
 
-    paginator = Paginator(total, 5)
-    try:
-        users = paginator.page(page)
-    except PageNotAnInteger:
-        users = paginator.page(1)
-    except EmptyPage:
-        users = paginator.page(paginator.num_pages)
+   
 
     context ={'users':users,'total_pv':total_pv, 'cancelled_pv':cancelled_pv,'returned_pv':returned_pv, 'completed_pv':completed_pv,'myFilter':myFilter}
 
@@ -74,15 +71,10 @@ def PrincipalDash(request):
     completed_pv =total.filter(Status='Completed').count()
     returned_pv =total.filter(Status='Returned').count()
 
-    page = request.GET.get('page', 1)
-
     paginator = Paginator(total, 5)
-    try:
-        users = paginator.page(page)
-    except PageNotAnInteger:
-        users = paginator.page(1)
-    except EmptyPage:
-        users = paginator.page(paginator.num_pages)
+    page_number = request.GET.get('page')
+    users = paginator.get_page(page_number)
+    page = request.GET.get('page', 1)
 
     context ={'users':users,'total_pv':total_pv, 'cancelled_pv':cancelled_pv,'returned_pv':returned_pv, 'completed_pv':completed_pv,'myFilter':myFilter}
 
