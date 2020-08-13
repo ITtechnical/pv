@@ -21,7 +21,7 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script> -->
 </head>
 
-<body class="sidebar-mini layout-fixed sidebar-open">
+<body class=" hold-transition sidebar-mini layout-fixed sidebar-open layout-navbar-fixed ">
     <div class="wrapper">
         <!-- Navbar -->
         {% include 'pv/navbar.html' %}
@@ -68,8 +68,10 @@
 
     </div>
     <!-- ./wrapper -->
-
-
+    {% include 'pv/footer.html' %}
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
 
 
 
