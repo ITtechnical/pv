@@ -481,14 +481,14 @@ class Total_moved_to_chest(LoginRequiredMixin,ListView):
     model = models.Pv # model been used
     paginate_by = 5 # no of items u want to show on each page of the template
     today = datetime.datetime.now() #todays date saved in a variable called today
-    queryset = Pv.objects.all().filter(Date_recieved__year=today.year).order_by('-IA_System_Code') # query to filter the total processed pv for the yr
+    queryset = Pv.objects.all().filter(returned_to_chest__gt=0, Date_recieved__year=today.year).order_by('-IA_System_Code') # query to filter the total processed pv for the yr
 
 @login_required
 def chestcsv(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="returedtochest.csv"'
     today = datetime.datetime.now()
-    pvlist = Pv.objects.all().filter(Date_recieved__year=today.year,Date_recieved__month=today.month).order_by('IA_System_Code')
+    pvlist = Pv.objects.all().filter(returned_to_chest__gt=0, Date_recieved__year=today.year).order_by('IA_System_Code')
     writer = csv.writer(response)
     writer.writerow(['IA_System_Code','IA_code','Date_recieved','Pv_reference','Source_of_Funding','Cost_center','Payee','Description','Account_code','Gross_amount','Withholding_tax','Net_amount','Status','Acc_Impress','Date_returned','Type_of_accounts','Type_of_pv','returned_to_chest'])
     for pv in pvlist :
