@@ -18,6 +18,8 @@ urlpatterns = [
         path('usersearch/', views.Usersearch, name ='usersearch'),
         path('principalsearch/', views.Prinsearch, name ='princsearch'),
         path('registeredpv/', views.PvList.as_view(), name ='registeredpv'),
+        path('movedtochest/', views.Total_moved_to_chest.as_view(), name ='movetochest'),
+
         path('pv/<int:pk>/update',views.PvUpdateView.as_view(), name ='pvupdate'),
         path('pv/<int:pk>/update/honurarium',views.HunUpdateView.as_view(), name ='hunupdate'),
         path('pv/<int:pk>/update/honurarium/benefit',views.BenefitUpdateView.as_view(), name ='benefithunupdate'),
@@ -46,7 +48,8 @@ urlpatterns = [
         path('pv/accountableimpress/csv',views.accountableimpresss, name= 'accountableimpresscsv'),
         path('pv/nonaccountableimpress/csv',views.nonaccountableimpresss, name= 'nonaccountableimpresscsv'),
         path('pv/beneficiaries/csv',views.beneficiariess, name= 'beneficiariescsv'),
-      
+        path('pv/movetochest/csv',views.chestcsv, name= 'movetochestcsv'),
+
       ]
  
 
