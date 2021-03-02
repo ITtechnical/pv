@@ -26,7 +26,7 @@ SECRET_KEY = 'f198@pcjz7gfpfexxih-w3zvmc(c&#!bmo_69a9jbna5g7%#tg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.16.1.42']
+ALLOWED_HOSTS = ['']
 
 
 # Application definition
@@ -88,10 +88,10 @@ WSGI_APPLICATION = 'auditservice.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'AUDITSERVICE',
-        'USER': 'pv',
-        'PASSWORD': 'lovia2020',
-        'HOST': 'localhost',
+        'NAME': '###########',
+        'USER': '####################',
+        'PASSWORD': '########',
+        'HOST': '########',
     }
 }
 
